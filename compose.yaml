@@ -1,0 +1,41 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker compose reference guide at
+# https://docs.docker.com/compose/compose-file/
+
+services:
+  service__varnish:
+    image: arm64v8/varnish:latest
+    volumes:
+      - ./data/varnish/default.vcl:/etc/varnish/default.vcl:ro
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:1002:80
+    # tmpfs:
+    #   - /var/lib/varnish:exec
+    environment:
+      VARNISH_SIZE: 2G
+    depends_on:
+      - app__url_shortener
+
+  service__redis:
+    image: arm64v8/redis:latest
+    volumes:
+      - ./data/redis:/data
+    restart: unless-stopped
+
+  app__url_shortener:
+    build:
+      context: .
+    environment:
+      PORT: 1234
+      REDIS_HOST: service__redis
+      REDIS_PORT: 6379
+      NODE_ENV: production
+      APP_URL: l.ramit.io
+    restart: unless-stopped
+    depends_on:
+      - service__redis
+    develop:
+      watch:
+        - path: ./src
+          action: rebuild
