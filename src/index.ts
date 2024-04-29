@@ -5,6 +5,7 @@ interface RecordMetrics {
   access_count: number;
   access_timestamps: Array<number>;
 }
+
 interface RecordStructure {
   url: string;
   single: boolean;
@@ -204,8 +205,8 @@ const app = new Elysia()
       await client.disconnect();
 
       return {
-        short_link_code: uniqKey,
-        short_url: `https://${process.env.APP_URL}/${uniqKey}`,
+        short_code: uniqKey,
+        short_link: `https://${process.env.APP_URL}/${uniqKey}`,
       };
     },
     {
