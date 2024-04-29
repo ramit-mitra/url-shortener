@@ -10,10 +10,10 @@ services:
     restart: unless-stopped
     ports:
       - 127.0.0.1:1002:80
-    # tmpfs:
-    #   - /var/lib/varnish:exec
     environment:
-      VARNISH_SIZE: 2G
+      VARNISH_SIZE: 1G
+    cpus: "0.25"
+    mem_limit: "256M"
     depends_on:
       - app__url_shortener
 
@@ -21,6 +21,8 @@ services:
     image: arm64v8/redis:latest
     volumes:
       - ./data/redis:/data
+    cpus: "0.25"
+    mem_limit: "512M"
     restart: unless-stopped
 
   app__url_shortener:
@@ -32,6 +34,8 @@ services:
       REDIS_PORT: 6379
       NODE_ENV: production
       APP_URL: l.ramit.io
+    cpus: "0.5"
+    mem_limit: "256M"
     restart: unless-stopped
     depends_on:
       - service__redis

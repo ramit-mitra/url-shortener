@@ -8,12 +8,6 @@ backend default {
     .port = "1234";
 }
 
-# acl purge {
-#     "localhost";
-#     "127.0.0.1";
-#     "::1";
-# }
-
 sub vcl_recv {
     # Rate limit requests
     # Allow max 10 requests per 15 seconds
@@ -32,7 +26,9 @@ sub vcl_recv {
 }
 
 sub vcl_deliver {
-    # this probably doesn't work
-    unset resp.http.Via;
-    unset resp.http.X-Varnish;
+    unset resp.http.via;
+    unset resp.http.x-url;
+    unset resp.http.x-host;
+    unset resp.http.server;
+    unset resp.http.x-powered-by;
 }
