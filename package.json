@@ -1,12 +1,17 @@
 {
   "name": "url-shortener",
-  "version": "1.0.50",
+  "version": "1.1.0",
+  "description": "A url shortening service built using BunJS.",
+  "author": "Ramit Mitra <ramit@ramit.io> (https://ramit.io)",
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
+    "@elysiajs/server-timing": "^1.0.2",
     "elysia": "latest",
+    "logestic": "^1.1.1",
     "redis": "^4.6.13"
   },
   "devDependencies": {

@@ -1,5 +1,7 @@
 import { Elysia, t } from "elysia";
+import { Logestic } from "logestic";
 import { createClient } from "redis";
+import { serverTiming } from "@elysiajs/server-timing";
 
 interface RecordMetrics {
   access_count: number;
@@ -9,6 +11,7 @@ interface RecordMetrics {
 interface RecordStructure {
   url: string;
   single: boolean;
+  created: number;
   expires: number;
   metrics: RecordMetrics;
 }
@@ -21,6 +24,7 @@ const recordMetrics: RecordMetrics = {
 const recordStructure: RecordStructure = {
   url: "",
   single: false,
+  created: Date.now(),
   expires: Date.now(),
   metrics: recordMetrics,
 };
@@ -52,10 +56,9 @@ const generateRandomKey = (n: number = 7): string => {
   return result;
 };
 
-const app = new Elysia()
-  .onResponse(() => {
-    console.log("Response", performance.now());
-  })
+new Elysia()
+  .use(serverTiming())
+  .use(Logestic.preset("fancy"))
   .get("/", () => responseStructure)
   .get(
     "/:code",
@@ -190,6 +193,7 @@ const app = new Elysia()
       const record = recordStructure;
       record.url = body.url;
       record.single = body.single ? body.single : false;
+      record.created = Date.now();
       record.expires = body.expires ? body.expires : -1;
 
       let uniqKey = generateRandomKey();
@@ -218,8 +222,6 @@ const app = new Elysia()
       }),
     },
   )
-  .listen(process.env.PORT || 3000);
-
-console.log(
-  `🦊 this awesome app is running at ${app.server?.hostname}:${app.server?.port}`,
-);
+  .listen(process.env.PORT || 3000, ({ hostname, port }) => {
+    console.log(`🦊 this awesome app is running at ${hostname}:${port}`);
+  });
