@@ -1,6 +1,7 @@
 import { Elysia, t } from "elysia";
 import { Logestic } from "logestic";
 import { createClient } from "redis";
+import { swagger } from "@elysiajs/swagger";
 import { serverTiming } from "@elysiajs/server-timing";
 
 interface RecordMetrics {
@@ -56,8 +57,20 @@ const generateRandomKey = (n: number = 7): string => {
   return result;
 };
 
+// create the app
 new Elysia()
   .use(serverTiming())
+  .use(
+    swagger({
+      path: "/v2/swagger",
+      documentation: {
+        info: {
+          title: "url-shortener Documentation",
+          version: "1.1.0",
+        },
+      },
+    }),
+  )
   .use(Logestic.preset("fancy"))
   .get("/", () => responseStructure)
   .get(
