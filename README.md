@@ -11,7 +11,7 @@ This is my `weekend hobby project` which is a `headless` URL shortener service.
 - [Redis](https://redis.io/)
 - [Varnish Cache](https://varnish-cache.org/)
 - [Docker](https://www.docker.com/)
-- [Cloudflare](https://www.cloudflare.com/en-in/) not mandatory
+- [Cloudflare](https://www.cloudflare.com/en-in/) (not mandatory)
 
 ## What it does?
 
@@ -58,9 +58,9 @@ The `app` will be accessible on PORT `1002`. You can change the port mapping in 
 
 ## Suggestions and feedback
 
-Got ideas for a `feature` or an enhancement? Feel free to open a PR.
+Got ideas 💡 about a `feature` or an `enhancement`? Feel free to [open a PR](https://github.com/ramit-mitra/url-shortener/compare).
 
-Found a 🐞? Feel free to open a PR and contribute.
+Found a 🐞? Feel free to [open a PR](https://github.com/ramit-mitra/url-shortener/compare) and contribute.
 
 ## Maintenance and LTS
 
