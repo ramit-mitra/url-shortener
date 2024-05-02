@@ -1,4 +1,4 @@
-# url-shortener
+# url-shortener-bunjs
 
 ## Getting Started
 
