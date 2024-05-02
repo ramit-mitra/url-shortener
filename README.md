@@ -64,6 +64,4 @@ Found a 🐞? Feel free to [open a PR](https://github.com/ramit-mitra/url-shorte
 
 ## Maintenance and LTS
 
-I built this project as a `hobby project`.
-
-While the initial implementation prioritizes functionality over optimization, it provides a solid foundation for further development. Due to the project's exploratory nature (wanted to try out `bunjs` and so built this), ongoing maintenance and feature enhancements are unlikely at this time. I think the project is pretty `stable-ish`.
+I built this project as a `hobby project`, wanted to try out `bunjs` and build something. While the initial implementation prioritizes functionality over optimization, it provides a solid foundation for further development. Due to the project's exploratory nature, ongoing maintenance and feature enhancements are unlikely at this time. I think the project is pretty `stable-ish`.
